@@ -185,6 +185,206 @@ The project evaluates:
 The Random Forest model was used for the main early-warning and later-term comparisons.
 
 ---
+# Visualizations
+
+The project includes several visualizations used during exploratory data analysis, model interpretation, and fairness evaluation.
+
+## Grade Distribution
+
+**File:**
+
+```text
+figures/grade_distribution.png
+```
+
+This histogram shows the distribution of final mathematics grades (`G3`) across all students.
+
+### Purpose
+
+* Understand the target variable distribution
+* Identify concentration of grades
+* Detect skewness or unusual patterns
+* Evaluate whether regression modeling is appropriate
+
+### Key Insight
+
+Most students are concentrated around the middle grade range, while very low and very high grades occur less frequently.
+
+---
+
+## Pass/Fail Distribution
+
+**File:**
+
+```text
+figures/pass_fail_distribution.png
+```
+
+This chart shows the number of students classified as:
+
+* Pass (`G3 ≥ 10`)
+* Fail (`G3 < 10`)
+
+### Purpose
+
+* Understand class balance
+* Identify potential class imbalance problems
+* Guide selection of evaluation metrics
+
+### Key Insight
+
+The dataset contains more Pass cases than Fail cases.
+
+Because of this imbalance, metrics such as Recall, F1-score, and ROC-AUC are more informative than Accuracy alone.
+
+---
+
+## Correlation Matrix
+
+**File:**
+
+```text
+figures/correlation_matrix.png
+```
+
+This heatmap visualizes correlations among numerical variables.
+
+### Purpose
+
+* Discover relationships between variables
+* Identify strongly correlated features
+* Improve understanding of the dataset structure
+
+### Key Insight
+
+Previous grades (`G1`, `G2`) show strong relationships with the final grade (`G3`), helping explain why later-term prediction performs substantially better than early-warning prediction.
+
+### Important Note
+
+Correlation does not imply causation.
+
+A strong correlation indicates association, not proof that one variable causes changes in another.
+
+---
+
+## Feature Importance
+
+**File:**
+
+```text
+figures/feature_importance.png
+```
+
+This visualization displays Random Forest feature importance scores.
+
+### Purpose
+
+* Understand which variables contribute most to predictions
+* Improve model interpretability
+* Support feature analysis
+
+### Key Findings
+
+Important features included:
+
+* failures
+* absences
+* goout
+* age
+* Fedu
+* Medu
+* health
+* studytime
+
+These variables contributed substantially to model predictions.
+
+### Important Note
+
+Feature importance indicates predictive usefulness, not causal influence.
+
+---
+
+## Permutation Importance
+
+**File:**
+
+```text
+figures/permutation_importance.png
+```
+
+This plot shows permutation importance scores.
+
+### Purpose
+
+* Provide a more robust estimate of feature contribution
+* Validate traditional Random Forest importance rankings
+
+### Method
+
+For each feature:
+
+1. Shuffle the feature values.
+2. Measure model performance again.
+3. Compute performance loss.
+
+A larger performance drop indicates a more important feature.
+
+### Key Finding
+
+The variable:
+
+```text
+failures
+```
+
+produced one of the largest performance decreases when shuffled, indicating strong predictive value.
+
+---
+
+## Fairness Analysis
+
+**File:**
+
+```text
+figures/fairness_analysis.png
+```
+
+This visualization compares Fail Recall across selected student groups.
+
+### Groups Evaluated
+
+* Sex
+* School
+* Residential Address
+
+### Purpose
+
+* Evaluate subgroup performance
+* Identify potential disparities
+* Support responsible AI analysis
+
+### Key Insight
+
+Fail Recall differed across some groups, although subgroup sizes were relatively small and variability across folds remained substantial.
+
+Therefore, the results should be interpreted as preliminary fairness signals rather than evidence of systematic discrimination.
+
+---
+
+## Why Visualizations Matter
+
+Visualizations help transform model outputs into understandable insights.
+
+In this project, visualizations supported:
+
+* Dataset understanding
+* Feature analysis
+* Model interpretation
+* Fairness evaluation
+* Responsible AI discussion
+
+They complement numerical metrics and help explain how the model behaves beyond overall performance scores.
+
 
 # Results
 
